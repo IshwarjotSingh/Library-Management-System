@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Final_Library_management_LasalleCollegeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BookInfo">
+          <Key>
+            <PropertyRef Name="b_id" />
+          </Key>
+          <Property Name="b_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_name" Type="varchar" MaxLength="50" />
+          <Property Name="aut_id" Type="int" />
+          <Property Name="pub_id" Type="int" />
+          <Property Name="cat_id" Type="int" />
+          <Property Name="pages" Type="int" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_name" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IssueBook">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_id" Type="int" />
+          <Property Name="b_id" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="MemberInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="publisher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BookInfo_author">
+          <End Role="author" Type="Self.author" Multiplicity="0..1" />
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="aut_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInfo_BookInfo">
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="1" />
+          <End Role="BookInfo1" Type="Self.BookInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BookInfo">
+              <PropertyRef Name="b_id" />
+            </Principal>
+            <Dependent Role="BookInfo1">
+              <PropertyRef Name="b_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInfo_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInfo_publisher">
+          <End Role="publisher" Type="Self.publisher" Multiplicity="0..1" />
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publisher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueBook_BookInfo">
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="0..1" />
+          <End Role="IssueBook" Type="Self.IssueBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookInfo">
+              <PropertyRef Name="b_id" />
+            </Principal>
+            <Dependent Role="IssueBook">
+              <PropertyRef Name="b_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueBook_MemberInfo">
+          <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="0..1" />
+          <End Role="IssueBook" Type="Self.IssueBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IssueBook">
+              <PropertyRef Name="m_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Final_Library_management_LasalleCollegeModelStoreContainer">
+          <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookInfo" EntityType="Self.BookInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssueBook" EntityType="Self.IssueBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberInfo" EntityType="Self.MemberInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="publisher" EntityType="Self.publisher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookInfo_author" Association="Self.FK_BookInfo_author">
+            <End Role="author" EntitySet="author" />
+            <End Role="BookInfo" EntitySet="BookInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInfo_BookInfo" Association="Self.FK_BookInfo_BookInfo">
+            <End Role="BookInfo" EntitySet="BookInfo" />
+            <End Role="BookInfo1" EntitySet="BookInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInfo_category" Association="Self.FK_BookInfo_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="BookInfo" EntitySet="BookInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInfo_publisher" Association="Self.FK_BookInfo_publisher">
+            <End Role="publisher" EntitySet="publisher" />
+            <End Role="BookInfo" EntitySet="BookInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueBook_BookInfo" Association="Self.FK_IssueBook_BookInfo">
+            <End Role="BookInfo" EntitySet="BookInfo" />
+            <End Role="IssueBook" EntitySet="IssueBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueBook_MemberInfo" Association="Self.FK_IssueBook_MemberInfo">
+            <End Role="MemberInfo" EntitySet="MemberInfo" />
+            <End Role="IssueBook" EntitySet="IssueBook" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Final_Library_management_LasalleCollegeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookInfoes" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_author" FromRole="author" ToRole="BookInfo" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cat_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookInfoes" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_category" FromRole="category" ToRole="BookInfo" />
+        </EntityType>
+        <EntityType Name="publisher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookInfoes" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_publisher" FromRole="publisher" ToRole="BookInfo" />
+        </EntityType>
+        <EntityContainer Name="Final_Library_management_LasalleCollegeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="authors" EntityType="Self.author" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="publishers" EntityType="Self.publisher" />
+          <EntitySet Name="BookInfoes" EntityType="Final_Library_management_LasalleCollegeModel.BookInfo" />
+          <AssociationSet Name="FK_BookInfo_author" Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_author">
+            <End Role="author" EntitySet="authors" />
+            <End Role="BookInfo" EntitySet="BookInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInfo_category" Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="BookInfo" EntitySet="BookInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInfo_publisher" Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_publisher">
+            <End Role="publisher" EntitySet="publishers" />
+            <End Role="BookInfo" EntitySet="BookInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInfo_BookInfo" Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_BookInfo">
+            <End Role="BookInfo" EntitySet="BookInfoes" />
+            <End Role="BookInfo1" EntitySet="BookInfoes" />
+          </AssociationSet>
+          <EntitySet Name="MemberInfoes" EntityType="Final_Library_management_LasalleCollegeModel.MemberInfo" />
+          <EntitySet Name="IssueBooks" EntityType="Final_Library_management_LasalleCollegeModel.IssueBook" />
+          <AssociationSet Name="FK_IssueBook_BookInfo" Association="Final_Library_management_LasalleCollegeModel.FK_IssueBook_BookInfo">
+            <End Role="BookInfo" EntitySet="BookInfoes" />
+            <End Role="IssueBook" EntitySet="IssueBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueBook_MemberInfo" Association="Final_Library_management_LasalleCollegeModel.FK_IssueBook_MemberInfo">
+            <End Role="MemberInfo" EntitySet="MemberInfoes" />
+            <End Role="IssueBook" EntitySet="IssueBooks" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="BookInfo">
+          <Key>
+            <PropertyRef Name="b_id" />
+          </Key>
+          <Property Name="b_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aut_id" Type="Int32" />
+          <Property Name="pub_id" Type="Int32" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="pages" Type="Int32" />
+          <NavigationProperty Name="author" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_author" FromRole="BookInfo" ToRole="author" />
+          <NavigationProperty Name="category" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_category" FromRole="BookInfo" ToRole="category" />
+          <NavigationProperty Name="publisher" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_publisher" FromRole="BookInfo" ToRole="publisher" />
+          <NavigationProperty Name="BookInfo1" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_BookInfo" FromRole="BookInfo" ToRole="BookInfo1" />
+          <NavigationProperty Name="BookInfo2" Relationship="Final_Library_management_LasalleCollegeModel.FK_BookInfo_BookInfo" FromRole="BookInfo1" ToRole="BookInfo" />
+          <NavigationProperty Name="IssueBooks" Relationship="Final_Library_management_LasalleCollegeModel.FK_IssueBook_BookInfo" FromRole="BookInfo" ToRole="IssueBook" />
+        </EntityType>
+        <Association Name="FK_BookInfo_author">
+          <End Type="Final_Library_management_LasalleCollegeModel.author" Role="author" Multiplicity="0..1" />
+          <End Type="Final_Library_management_LasalleCollegeModel.BookInfo" Role="BookInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="aut_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInfo_category">
+          <End Type="Final_Library_management_LasalleCollegeModel.category" Role="category" Multiplicity="0..1" />
+          <End Type="Final_Library_management_LasalleCollegeModel.BookInfo" Role="BookInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInfo_publisher">
+          <End Type="Final_Library_management_LasalleCollegeModel.publisher" Role="publisher" Multiplicity="0..1" />
+          <End Type="Final_Library_management_LasalleCollegeModel.BookInfo" Role="BookInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publisher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInfo_BookInfo">
+          <End Type="Final_Library_management_LasalleCollegeModel.BookInfo" Role="BookInfo" Multiplicity="1" />
+          <End Type="Final_Library_management_LasalleCollegeModel.BookInfo" Role="BookInfo1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BookInfo">
+              <PropertyRef Name="b_id" />
+            </Principal>
+            <Dependent Role="BookInfo1">
+              <PropertyRef Name="b_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MemberInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IssueBooks" Relationship="Final_Library_management_LasalleCollegeModel.FK_IssueBook_MemberInfo" FromRole="MemberInfo" ToRole="IssueBook" />
+        </EntityType>
+        <EntityType Name="IssueBook">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_id" Type="Int32" />
+          <Property Name="b_id" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BookInfo" Relationship="Final_Library_management_LasalleCollegeModel.FK_IssueBook_BookInfo" FromRole="IssueBook" ToRole="BookInfo" />
+          <NavigationProperty Name="MemberInfo" Relationship="Final_Library_management_LasalleCollegeModel.FK_IssueBook_MemberInfo" FromRole="IssueBook" ToRole="MemberInfo" />
+        </EntityType>
+        <Association Name="FK_IssueBook_BookInfo">
+          <End Type="Final_Library_management_LasalleCollegeModel.BookInfo" Role="BookInfo" Multiplicity="0..1" />
+          <End Type="Final_Library_management_LasalleCollegeModel.IssueBook" Role="IssueBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookInfo">
+              <PropertyRef Name="b_id" />
+            </Principal>
+            <Dependent Role="IssueBook">
+              <PropertyRef Name="b_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueBook_MemberInfo">
+          <End Type="Final_Library_management_LasalleCollegeModel.MemberInfo" Role="MemberInfo" Multiplicity="0..1" />
+          <End Type="Final_Library_management_LasalleCollegeModel.IssueBook" Role="IssueBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IssueBook">
+              <PropertyRef Name="m_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Final_Library_management_LasalleCollegeModelStoreContainer" CdmEntityContainer="Final_Library_management_LasalleCollegeEntities">
+          <EntitySetMapping Name="authors">
+            <EntityTypeMapping TypeName="Final_Library_management_LasalleCollegeModel.author">
+              <MappingFragment StoreEntitySet="author">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="Final_Library_management_LasalleCollegeModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="publishers">
+            <EntityTypeMapping TypeName="Final_Library_management_LasalleCollegeModel.publisher">
+              <MappingFragment StoreEntitySet="publisher">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookInfoes">
+            <EntityTypeMapping TypeName="Final_Library_management_LasalleCollegeModel.BookInfo">
+              <MappingFragment StoreEntitySet="BookInfo">
+                <ScalarProperty Name="pages" ColumnName="pages" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="aut_id" ColumnName="aut_id" />
+                <ScalarProperty Name="b_name" ColumnName="b_name" />
+                <ScalarProperty Name="b_id" ColumnName="b_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberInfoes">
+            <EntityTypeMapping TypeName="Final_Library_management_LasalleCollegeModel.MemberInfo">
+              <MappingFragment StoreEntitySet="MemberInfo">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssueBooks">
+            <EntityTypeMapping TypeName="Final_Library_management_LasalleCollegeModel.IssueBook">
+              <MappingFragment StoreEntitySet="IssueBook">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="b_id" ColumnName="b_id" />
+                <ScalarProperty Name="m_id" ColumnName="m_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

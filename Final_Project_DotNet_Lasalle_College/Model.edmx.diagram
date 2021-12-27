@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bff8bb27392a4f8f9183704fe1eda92b" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="Final_Library_management_LasalleCollegeModel.author" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Library_management_LasalleCollegeModel.category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Library_management_LasalleCollegeModel.publisher" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Library_management_LasalleCollegeModel.BookInfo" Width="1.5" PointX="5" PointY="2.75" />
+        <AssociationConnector Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_author" />
+        <AssociationConnector Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_category" />
+        <AssociationConnector Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_publisher" />
+        <AssociationConnector Association="Final_Library_management_LasalleCollegeModel.FK_BookInfo_BookInfo" />
+        <EntityTypeShape EntityType="Final_Library_management_LasalleCollegeModel.MemberInfo" Width="1.5" PointX="2.125" PointY="6.25" />
+        <EntityTypeShape EntityType="Final_Library_management_LasalleCollegeModel.IssueBook" Width="1.5" PointX="7.25" PointY="4.5" />
+        <AssociationConnector Association="Final_Library_management_LasalleCollegeModel.FK_IssueBook_BookInfo" />
+        <AssociationConnector Association="Final_Library_management_LasalleCollegeModel.FK_IssueBook_MemberInfo" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

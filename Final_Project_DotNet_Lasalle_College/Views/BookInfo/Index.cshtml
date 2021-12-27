@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Final_Project_DotNet_Lasalle_College.BookInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.b_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pages)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.author.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category.cat_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.publisher.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.b_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pages)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category.cat_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.publisher.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.b_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.b_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.b_id })
+        </td>
+    </tr>
+}
+
+</table>

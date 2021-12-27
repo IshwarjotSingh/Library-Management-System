@@ -1,0 +1,58 @@
+﻿@model Final_Project_DotNet_Lasalle_College.BookInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.b_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.b_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pages)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.author.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.category.cat_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category.cat_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publisher.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publisher.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.b_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
